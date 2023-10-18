@@ -140,6 +140,13 @@
 				Sets the camera projection to perspective mode (see [constant PROJECTION_PERSPECTIVE]), by specifying a [param fov] (field of view) angle in degrees, and the [param z_near] and [param z_far] clip planes in world space units.
 			</description>
 		</method>
+		<method name="set_custom">
+			<return type="void" />
+			<param index="0" name="projection" type="Projection" />
+			<description>
+				Sets the camera projection to custom mode (see [constant PROJECTION_CUSTOM]), by specifying a [param projection] matrix.
+			</description>
+		</method>
 		<method name="unproject_position" qualifiers="const">
 			<return type="Vector2" />
 			<param index="0" name="world_point" type="Vector3" />
@@ -190,6 +197,10 @@
 			The camera's frustum offset. This can be changed from the default to create "tilted frustum" effects such as [url=https://zdoom.org/wiki/Y-shearing]Y-shearing[/url].
 			[b]Note:[/b] Only effective if [member projection] is [constant PROJECTION_FRUSTUM].
 		</member>
+		<member name="custom_projection" type="Projection" setter="set_custom_projection" getter="get_custom_projection" default="Projection(Vector4(1.30322527885437, 0.0, 0.0, 0.0), Vector4(0.0, 1.30322527885437, 0.0, 0.0), Vector4(0.0, 0.0, -1.00002503395081, -1.0), Vector4(0.0, 0.0, -0.10000125318766, 0.0))">
+			The camera's custom projection. This can be changed from the default to create any projection.
+			[b]Note:[/b] Only effective if [member projection] is [constant PROJECTION_FRUSTUM].
+		</member>
 		<member name="h_offset" type="float" setter="set_h_offset" getter="get_h_offset" default="0.0">
 			The horizontal (X) offset of the camera viewport.
 		</member>
@@ -218,6 +229,9 @@
 		</constant>
 		<constant name="PROJECTION_FRUSTUM" value="2" enum="ProjectionType">
 			Frustum projection. This mode allows adjusting [member frustum_offset] to create "tilted frustum" effects.
+		</constant>
+		<constant name="PROJECTION_CUSTOM" value="3" enum="ProjectionType">
+			Custom projection. This mode allows adjusting [member custom_projection] to set any projection wanted.
 		</constant>
 		<constant name="KEEP_WIDTH" value="0" enum="KeepAspect">
 			Preserves the horizontal aspect ratio; also known as Vert- scaling. This is usually the best option for projects running in portrait mode, as taller aspect ratios will benefit from a wider vertical FOV.

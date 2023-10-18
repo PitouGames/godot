@@ -43,7 +43,8 @@ public:
 	enum ProjectionType {
 		PROJECTION_PERSPECTIVE,
 		PROJECTION_ORTHOGONAL,
-		PROJECTION_FRUSTUM
+		PROJECTION_FRUSTUM,
+		PROJECTION_CUSTOM
 	};
 
 	enum KeepAspect {
@@ -72,6 +73,8 @@ private:
 	real_t v_offset = 0.0;
 	real_t h_offset = 0.0;
 	KeepAspect keep_aspect = KEEP_HEIGHT;
+	// value from the default perspective camera on a squared window
+	Projection custom_projection = Projection(Vector4(1.30322527885437, 0.0, 0.0, 0.0), Vector4(0.0, 1.30322527885437, 0.0, 0.0), Vector4(0.0, 0.0, -1.00002503395081, -1.0), Vector4(0.0, 0.0, -0.10000125318766, 0.0));
 
 	RID camera;
 	RID scenario_id;
@@ -116,6 +119,7 @@ public:
 	void set_perspective(real_t p_fovy_degrees, real_t p_z_near, real_t p_z_far);
 	void set_orthogonal(real_t p_size, real_t p_z_near, real_t p_z_far);
 	void set_frustum(real_t p_size, Vector2 p_offset, real_t p_z_near, real_t p_z_far);
+	void set_custom(Projection p_projection);
 	void set_projection(Camera3D::ProjectionType p_mode);
 
 	void make_current();
@@ -130,6 +134,7 @@ public:
 	real_t get_far() const;
 	real_t get_near() const;
 	Vector2 get_frustum_offset() const;
+ 	Projection get_custom_projection() const;
 
 	ProjectionType get_projection() const;
 
@@ -138,6 +143,7 @@ public:
 	void set_far(real_t p_far);
 	void set_near(real_t p_near);
 	void set_frustum_offset(Vector2 p_offset);
+	void set_custom_projection(Projection _projection);
 
 	virtual Transform3D get_camera_transform() const;
 	virtual Projection get_camera_projection() const;
