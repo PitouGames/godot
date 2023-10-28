@@ -74,9 +74,7 @@ void Camera3D::_validate_property(PropertyInfo &p_property) const {
 			p_property.usage = PROPERTY_USAGE_NO_EDITOR;
 		}
 	} else if (p_property.name == "custom_projection") {
-		if (mode != PROJECTION_CUSTOM) {
-			p_property.usage = PROPERTY_USAGE_NO_EDITOR;
-		}
+		p_property.usage = PROPERTY_USAGE_NO_EDITOR;
 	} else if (p_property.name == "near" || p_property.name == "far") {
 		if (mode != PROJECTION_PERSPECTIVE && mode != PROJECTION_ORTHOGONAL && mode != PROJECTION_FRUSTUM) {
 			p_property.usage = PROPERTY_USAGE_NO_EDITOR;
